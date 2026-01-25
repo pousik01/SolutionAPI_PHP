@@ -1,5 +1,5 @@
 <?php
-$host = '127.0.1.22';
+$host = 'MySQL-8.0';
 $username = 'root';
 $password = '';
 $database = 'booksDB';
@@ -9,8 +9,9 @@ $connect = mysqli_connect($host, $username, $password, $database);
 
 // Проверяем подключение
 if (!$connect) {
-    echo("Connection failed: " . mysqli_connect_error());
-}else{
-    echo "Успешное соединение";
+    error_log("Connection failed: " . mysqli_connect_error());
+
+    http_response_code(500);
+    die(json_encode(['error' => 'Database connection failed']));
 }
 ?>
